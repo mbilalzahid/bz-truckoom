@@ -1,0 +1,27 @@
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .heading-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; /* full viewport height */
+  }
+  
+  .heading-wrapper h1 {
+    margin: 0;
+  }
+  
+
+  
+  
+  

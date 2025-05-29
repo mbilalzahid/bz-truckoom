@@ -1,0 +1,66 @@
+<form [formGroup]="serviceForm" (ngSubmit)="onSubmit()" class="form-container">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Service Name</mat-label>
+    <input matInput formControlName="serviceName" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Service Date</mat-label>
+    <input
+      matInput
+      type="datetime-local"
+      formControlName="serviceDate"
+      required
+    />
+  </mat-form-field>
+
+  <div formArrayName="tasks">
+    <div
+      *ngFor="let task of tasks.controls; let i = index"
+      [formGroupName]="i"
+      class="task-card"
+    >
+      <mat-card>
+        <mat-card-title class="task-title">Task {{ i + 1 }}</mat-card-title>
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Task Name</mat-label>
+          <input matInput formControlName="taskName" required />
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Remarks</mat-label>
+          <textarea matInput formControlName="remarks"></textarea>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="removeTask(i)"
+          type="button"
+          *ngIf="tasks.length > 1"
+        >
+          Remove Task
+        </button>
+      </mat-card>
+    </div>
+  </div>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="addTask()"
+    type="button"
+    class="add-task-button"
+  >
+    Add Task
+  </button>
+
+  <button mat-raised-button color="accent" type="submit" class="mt-3">
+    {{ isEditMode ? "Update" : "Create" }} Service
+  </button>
+</form>

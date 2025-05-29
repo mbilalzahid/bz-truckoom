@@ -1,0 +1,57 @@
+<div class="toolbar">
+  <button mat-raised-button color="primary" (click)="onAddService()">
+    Add Service
+  </button>
+</div>
+
+<div *ngFor="let service of services" class="service-card mat-elevation-z2">
+  <div class="header">
+    <h2>{{ service.serviceName }}</h2>
+    <span
+      ><strong>Date:</strong> {{ service.serviceDate | date : "medium" }}</span
+    >
+
+    <!-- Action buttons -->
+    <div class="actions">
+      <button mat-icon-button color="accent" (click)="onEditService(service)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onDeleteService(service)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <table
+    mat-table
+    [dataSource]="service.tasks"
+    class="mat-elevation-z1 full-width-table"
+  >
+    <!-- Task Name Column -->
+    <ng-container matColumnDef="taskName">
+      <th mat-header-cell *matHeaderCellDef>Task Name</th>
+      <td mat-cell *matCellDef="let task">{{ task.taskName }}</td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let task">{{ task.description }}</td>
+    </ng-container>
+
+    <!-- Remarks Column -->
+    <ng-container matColumnDef="remarks">
+      <th mat-header-cell *matHeaderCellDef>Remarks</th>
+      <td mat-cell *matCellDef="let task">{{ task.remarks }}</td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="['taskName', 'description', 'remarks']"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: ['taskName', 'description', 'remarks']"
+    ></tr>
+  </table>
+</div>
