@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: truckoom-sqlserver
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - truckoom-sql-data:/var/opt/mssql
+    networks:
+      - truckoom-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: truckoom-backend
+    depends_on:
+      - sqlserver
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=TruckoomDb;User Id=sa;Password=YourStrong!Passw0rd;"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      JwtSettings__SecretKey: "supersecretkey1234567890abcdef12345678"
+      JwtSettings__Issuer: "TruckoomAPI"
+      JwtSettings__Audience: "TruckoomClients"
+      JwtSettings__ExpiryMinutes: "60"
+    ports:
+      - "5000:5000"
+    networks:
+      - truckoom-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: truckoom-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - truckoom-net
+
+volumes:
+  truckoom-sql-data:
+
+networks:
+  truckoom-net:

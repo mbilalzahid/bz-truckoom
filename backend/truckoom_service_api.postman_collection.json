@@ -1,0 +1,126 @@
+{
+  "info": {
+    "name": "Truckoom Service API",
+    "_postman_id": "truckoom-service-api-collection",
+    "description": "CRUD operations for Services with JWT authentication",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Services",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:7157/api/services",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "7157",
+          "path": [
+            "api",
+            "services"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Service By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:7157/api/services/1",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "7157",
+          "path": [
+            "api",
+            "services",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Service",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"serviceName\": \"Oil Change\",\n  \"serviceDate\": \"2025-05-27T11:06:56\",\n  \"tasks\": [\n    {\n      \"taskName\": \"Replace Oil Filter\",\n      \"description\": \"Oil filter and engine oil change\",\n      \"remarks\": \"Customer requested full synthetic\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "https://localhost:7157/api/services",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "7157",
+          "path": [
+            "api",
+            "services"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Update Service",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"serviceName\": \"Updated Service Name\",\n  \"serviceDate\": \"2025-05-27T11:06:56\",\n  \"tasks\": [\n    {\n      \"taskName\": \"new task\",\n      \"description\": \"Install new oil filter\",\n      \"remarks\": \"testing\"\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "https://localhost:7157/api/services/2",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "7157",
+          "path": [
+            "api",
+            "services",
+            "2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Delete Service",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:7157/api/services/2",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "7157",
+          "path": [
+            "api",
+            "services",
+            "2"
+          ]
+        }
+      }
+    }
+  ]
+}
